@@ -5,13 +5,14 @@ import { useEffect } from 'react'
 import Link from 'next/link';
 
 export default function Mongo({ data }: any) {
-  useEffect(() => {
-    console.log(data);
-  }, []);
   return (
     <Container>
-      mongo
       <Link href="/">이동</Link>
+      {
+        data.map((goal: any, key: any) => (
+          <div key={key}><br />{goal._id} : {goal.text}</div>
+        ))
+      }
     </Container>
   )
 }
