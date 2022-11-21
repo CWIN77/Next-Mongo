@@ -3,8 +3,15 @@ import Goal from "../lib/mongodb/goal.model"
 import connectDB from "../lib/mongodb/connect"
 import { GetStaticProps } from 'next'
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function Mongo({ data }: any) {
+  const unloadHandle = () => {
+    navigator.sendBeacon("/api/hello", JSON.stringify("테스트 SendBeacon"));
+  };
+  useEffect(() => {
+    window.addEventListener("unload", unloadHandle)
+  }, [])
   return (
     <Container>
       <Link href="/">이동</Link>
@@ -36,3 +43,4 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { data: goal }
   }
 }
+
