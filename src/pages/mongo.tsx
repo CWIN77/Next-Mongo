@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Goal from "../lib/mongodb/goal.model"
 import connectDB from "../lib/mongodb/connect"
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link';
 
 export default function Mongo({ data }: any) {
@@ -22,8 +22,8 @@ const Container = styled.div`
   min-height:100vh;
 `
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  connectDB();
+export const getStaticProps: GetStaticProps = async () => {
+  await connectDB();
   const result = await Goal.find();
   const goal = result.map((d) => {
     const data = d.toObject();
